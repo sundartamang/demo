@@ -26,7 +26,7 @@ export class ProductComponent implements OnInit {
   dirKey = "asc";
   public currentPage = 1;
   public pagelimtit = 15;
-  gridData: any =[];
+  gridData: any = [];
 
 
   //sorting kendo data
@@ -39,9 +39,9 @@ export class ProductComponent implements OnInit {
   ];
 
 
-
   constructor(
     private _demoService: DemoService,
+    private _router: Router
   ) { }
 
   ngOnInit() {
@@ -49,10 +49,9 @@ export class ProductComponent implements OnInit {
   }
 
   // get product list
-
   productList() {
     this.isLoading = true
-    this._demoService.getProductList().subscribe((res) => {
+    this._demoService.getList().subscribe((res) => {
       this.productData = res['products']
 
       for (let data of this.productData) {
@@ -63,9 +62,6 @@ export class ProductComponent implements OnInit {
           this.brandList.push(data['brand'])
         }
       }
-
-      console.log(" category list ", this.categoryList)
-      console.log(" brand list ", this.brandList)
 
     }, error => {
       this.isLoading = false
@@ -98,14 +94,10 @@ export class ProductComponent implements OnInit {
     }
   }
 
-  // sorting function
-  public sortChange(sort: SortDescriptor[]): void {
-    this.orderByKey = "";
-    this.dirKey = "";
-    this.sort = sort;
-    this.dirKey = this.sort[0].dir;
-    this.orderByKey = this.sort[0].field;
-    this.productList();
+
+  // redirec to function
+  redirect(data: any) {
+    this._router.navigate([`/product-detail/${data.id}`])
   }
 
 

@@ -3,3 +3,24 @@ a{
     text-decoration: none !important;
     cursor: pointer;
 }
+
+.discount_product {
+    font-size: 14px;
+    color: #9e9e9e;;
+    margin-left: 6px;
+}
+
+.btn{
+    border-radius: 0px !important;
+}
+
+.main_btn{
+    border-radius: 0px !important;
+    background-color: #f57224;
+    color: #fff;
+}
+
+.main_btn:hover{
+    background-color: #dc580a;
+    color: #fff;
+}

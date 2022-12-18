@@ -13,11 +13,10 @@
     </li>
 </ul>
 
-
 <div class="row my-5">
     <ng-container *ngIf="showProduct">
         <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12 mb-5 " *ngFor="let product of productData ,index as i">
-            <div class="card product_card">
+            <div class="card product_card" (click)="redirect(product)">
                 <div class="card-header">
                     <img class="card-img-top" [src]="product?.thumbnail" alt="Card image cap">
                 </div>
@@ -46,8 +45,7 @@
                 [sortable]="{
                 allowUnsort : true,
                 mode : 'single'
-                }"
-                (pageChange)="pageChange($event)">
+                }">
                 {{currentPage}}
                 <kendo-grid-column
                     title="S.N."
@@ -62,7 +60,7 @@
                     </ng-template>
                 </kendo-grid-column>
                 <kendo-grid-column
-                    title="Product list"
+                    title="Product category list"
                     [headerStyle]="{
                     'font-weight': 'bold'
                     }">
@@ -76,13 +74,7 @@
                 </kendo-grid-column>
             </kendo-grid>
             <!--  kendo grid end -->
-                    
-            <!-- <ul class="list-group" >
-                <li class="list-group-item disabled">List of category</li>
-                <li class="list-group-item " *ngFor="let data of categoryList , index as i">
-                    {{i+1}}. <span class="pl-3 text-center">{{data}}</span>
-                </li>
-            </ul> -->
+
         </div>
         <div class="col-lg-3 col-md-3 col-sm-6"></div>
     </ng-container>
@@ -102,8 +94,7 @@
                 [sortable]="{
                 allowUnsort : true,
                 mode : 'single'
-                }"
-                (pageChange)="pageChange($event)">
+                }">
                 {{currentPage}}
                 <kendo-grid-column
                     title="S.N."
@@ -118,7 +109,7 @@
                     </ng-template>
                 </kendo-grid-column>
                 <kendo-grid-column
-                    title="Product list"
+                    title="Product brand list"
                     [headerStyle]="{
                     'font-weight': 'bold'
                     }">
@@ -132,13 +123,7 @@
                 </kendo-grid-column>
             </kendo-grid>
             <!--  kendo grid end -->
-            <!-- <ul class="list-group" >
-                <li class="list-group-item disabled">List of brand</li>
-                <li class="list-group-item " *ngFor="let data of brandList, index as i ">
-                    {{i+1}}. <span class="pl-3 text-center">{{data}}</span>
-                </li>
-                <br>
-            </ul> -->
+
         </div>
         <div class="col-lg-3 col-md-3 col-sm-6"></div>
     </ng-container>

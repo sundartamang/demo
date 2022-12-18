@@ -1,1 +1,42 @@
-<p>product-detail works!</p>
+<div>
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12"></div>
+        <div class="col-lg-8">
+            <a (click)="backPrevious()"> << Back</a>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12"></div>
+    </div>
+    <div class="row my-5">
+        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12"></div>
+        <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+            <div class="card flex-row flex-wrap">
+                <div class="card-header border-0" style="background-color: #fff !important;">
+                    <img [src]="productDetailData?.thumbnail" alt="">
+                </div>
+                <div class="card-block p-2">
+                    <h4 class="card-title">
+                        {{productDetailData?.title}} 
+                        <span class="pl-1" *ngIf="productDetailData?.rating>=4.5"><i class="fa fa-star" aria-hidden="true"></i></span>
+                    </h4> 
+                    <div class="my-1">
+                        <span class="discount_product">Stock : </span> {{productDetailData?.stock}}
+                    </div>
+                    <div class="my-1">
+                        <span class="discount_product">Brand : </span> {{productDetailData?.brand}} | <span class="discount_product">Category : </span> {{productDetailData?.category}}
+                    </div>
+                    <hr>
+                    <div class="my-2">
+                        <b>$</b> {{productDetailData?.price}} <span class="discount_product">{{productDetailData?.discountPercentage}} %</span>
+                    </div>
+                    <a class="btn btn-md main_btn text-light"   (click)="addToCart(productDetailData)">Add to Cart</a>
+                </div>
+                <div class="w-100"></div>
+                <div class="card-footer w-100 text-muted">
+                    <h5 class="my-2">Product detail</h5>
+                    {{productDetailData?.description}}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12"></div>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+.card {
+    .card-header {
+        background-color: none !important;
+
+        img {
+            max-height: 500px !important;
+        }
+    }
+
+    .card-block {
+        width: 48% !important;
+    }
+}
+
+.fa-star:before {
+    content: "\f005";
+    color: #ffcd1a !important;
+    font-size: 18px !important;
+}
