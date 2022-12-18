@@ -1,0 +1,146 @@
+<ul class="nav justify-content-center mt-3">
+    <li class="nav-item">
+        <a class="nav-link text-dark" [ngClass]="btnActive === 'product' ? 'active' : ''"
+            (click)="activeBtn('product')">Product</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" [ngClass]="btnActive === 'category' ? 'active' : ''"
+            (click)="activeBtn('category')">Category</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" [ngClass]="btnActive === 'brand' ? 'active' : ''"
+            (click)="activeBtn('brand')">Brand</a>
+    </li>
+</ul>
+
+
+<div class="row my-5">
+    <ng-container *ngIf="showProduct">
+        <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12 mb-5 " *ngFor="let product of productData ,index as i">
+            <div class="card product_card">
+                <div class="card-header">
+                    <img class="card-img-top" [src]="product?.thumbnail" alt="Card image cap">
+                </div>
+                <div class="card-body py-2">
+                    <h6 class="float:left mt-3">{{product?.title}}</h6>
+                    <div>
+                        <b>$</b> {{product?.price}} <span class="discount_product">{{product?.discountPercentage}}
+                            %</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+
+    <!-- category list section start -->
+    <ng-container *ngIf="showCategory">
+        <div class="col-lg-3 col-md-3 col-sm-6"></div>
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <!--  kendo grid start -->
+            <kendo-grid
+                [kendoGridBinding]="categoryList"
+                [pageSize]="pagelimtit"
+                [skip]="skip"
+                [pageable]="true"
+                [loading]="isLoading"
+                [sortable]="{
+                allowUnsort : true,
+                mode : 'single'
+                }"
+                (pageChange)="pageChange($event)">
+                {{currentPage}}
+                <kendo-grid-column
+                    title="S.N."
+                    [headerStyle]="{
+                    'font-weight': 'bold' }"
+                    [width]="85"
+                    [minResizableWidth]="75">
+                    <ng-template
+                        kendoGridCellTemplate
+                        let-rowIndex="rowIndex">
+                        <p>{{ rowIndex + 1 }}</p>
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column
+                    title="Product list"
+                    [headerStyle]="{
+                    'font-weight': 'bold'
+                    }">
+                    <ng-template
+                        kendoGridCellTemplate
+                        let-dataItem="dataItem">
+                        <p>
+                            <span class="pl-3">{{dataItem}}</span>
+                        </p>
+                    </ng-template>
+                </kendo-grid-column>
+            </kendo-grid>
+            <!--  kendo grid end -->
+                    
+            <!-- <ul class="list-group" >
+                <li class="list-group-item disabled">List of category</li>
+                <li class="list-group-item " *ngFor="let data of categoryList , index as i">
+                    {{i+1}}. <span class="pl-3 text-center">{{data}}</span>
+                </li>
+            </ul> -->
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6"></div>
+    </ng-container>
+    <!-- category list section end -->
+
+    <!-- brand list section start -->
+    <ng-container *ngIf="showBrand">
+        <div class="col-lg-3 col-md-3 col-sm-6"></div>
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <!--  kendo grid start -->
+            <kendo-grid
+                [kendoGridBinding]="brandList"
+                [pageSize]="pagelimtit"
+                [skip]="skip"
+                [pageable]="true"
+                [loading]="isLoading"
+                [sortable]="{
+                allowUnsort : true,
+                mode : 'single'
+                }"
+                (pageChange)="pageChange($event)">
+                {{currentPage}}
+                <kendo-grid-column
+                    title="S.N."
+                    [headerStyle]="{
+                    'font-weight': 'bold' }"
+                    [width]="85"
+                    [minResizableWidth]="75">
+                    <ng-template
+                        kendoGridCellTemplate
+                        let-rowIndex="rowIndex">
+                        <p>{{ rowIndex + 1 }}</p>
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column
+                    title="Product list"
+                    [headerStyle]="{
+                    'font-weight': 'bold'
+                    }">
+                    <ng-template
+                        kendoGridCellTemplate
+                        let-dataItem="dataItem">
+                        <p>
+                            <span class="pl-3">{{dataItem}}</span>
+                        </p>
+                    </ng-template>
+                </kendo-grid-column>
+            </kendo-grid>
+            <!--  kendo grid end -->
+            <!-- <ul class="list-group" >
+                <li class="list-group-item disabled">List of brand</li>
+                <li class="list-group-item " *ngFor="let data of brandList, index as i ">
+                    {{i+1}}. <span class="pl-3 text-center">{{data}}</span>
+                </li>
+                <br>
+            </ul> -->
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6"></div>
+    </ng-container>
+    <!-- brand list section end -->
+</div>

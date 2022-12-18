@@ -1,0 +1,77 @@
+img {
+    width: 100%;
+    height: 210px;
+}
+
+.demo {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.k-card-body h4 {
+    text-align: center;
+}
+
+.recipe-wrap {
+    padding-top: 12px;
+}
+
+.k-icon {
+    font-size: 14px;
+    margin-right: 4px;
+}
+
+.k-card-actions-vertical.k-card-actions-start .k-button,
+.k-card-actions-vertical.k-card-actions-end .k-button {
+    width: 50px;
+}
+
+.k-card-separator {
+    height: auto;
+}
+
+.k-icon.k-i-heart {
+    color: #ff6358;
+}
+
+.example-config {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 315px;
+}
+
+.product_card {
+    background: #fff;
+}
+
+.product_card:hover {
+    background-color: red !important;
+    cursor: pointer !important;
+}
+
+.discount_product {
+    font-size: 14px;
+    color: #9e9e9e;
+    ;
+    margin-left: 6px;
+}
+
+
+.active{
+    color: #fff !important;
+    border-radius: 40px;
+}
+
+.active, .btn:hover {
+    background-color: #666;
+    color: white !important;
+}
+
+.card{
+    border: none !important;
+}
+
+.card-header{
+    padding: 0px !important;
+}
