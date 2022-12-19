@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { config } from 'src/app/config';
+// import { config } from 'src/app/config';
 import { HttpClient } from '@angular/common/http';
 import { Product } from '../models/productModule';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import {environment} from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 export class DemoService {
 
   placeholder = [];
+  config = environment;
   cartItems = new BehaviorSubject([]);
   productData = new BehaviorSubject([]);
 
@@ -60,13 +62,27 @@ export class DemoService {
   }
 
   // is cart empty
+  checkData : boolean;
   get isCartEmpty() {
     let cart = this.getCartData()
-    if (cart == null) {
-      return false
-    } else {
-      return true
-    }
+
+    // let dataInCheckout = this.productData
+
+    this.productData.subscribe((res)=>{
+      if(res.length<1){
+        this.checkData =false
+      }else{
+        this.checkData = true;
+      }
+    })
+    console.log("CONDITION ", this.checkData)
+    return this.checkData
+    // console.log("DATA is => ", dataInCheckout)
+    // if (cart == null) {
+    //   return false
+    // } else {
+    //   return true
+    // }
   }
 
 
@@ -86,28 +102,26 @@ export class DemoService {
   }
 
 
-  sendProductData(data){
+  sendProductData(data) {
     this.productData.next(data)
   }
 
-  // receivedData(): Observable<any> {
-  //   return this.subject_data.asObservable();
-  // }
 
-
-
+  /*********************************************************API CALL*********************************************************/
 
   // get product list
-  product_list_url = `${config.base_url}products?limit=100`
+  product_list_url = `${this.config.apiURl}products?limit=100`
   getList() {
     return this._http.get(this.product_list_url)
   }
 
   // get product detail
-  get_detail = `${config.base_url}products/`
+  get_detail = `${this.config.apiURl}products/`
   getDetail(id) {
     return this._http.get(`${this.get_detail}${id}`)
   }
+
+  /*********************************************************TOAST MESSAGE*********************************************************/
 
   // toast success message
   toastSuccess(message) {
