@@ -9,7 +9,7 @@ import { CartComponent } from './components/cart.component';
   declarations: [CartComponent],
   imports: [
     CommonModule,
-    SelectedProductRoutingModule
-  ]
+    SelectedProductRoutingModule,
+  ],
 })
 export class SelectedProductModule { }

@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
+import { CheckoutGuard } from './shared/guard/checkout.guard';
 
 
 const routes: Routes = [
@@ -13,8 +15,13 @@ const routes: Routes = [
   },
   {
     path: "checkout",
+    canActivate: [CheckoutGuard],
     loadChildren: () => import("./_modules/checkout/checkout.module").then(m => m.CheckoutModule)
   },
+  {
+    path:('**'),
+    component: PageNotFoundComponent
+  }
 ];
 
 @NgModule({

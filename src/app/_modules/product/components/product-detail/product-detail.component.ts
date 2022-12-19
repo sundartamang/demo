@@ -28,8 +28,6 @@ export class ProductDetailComponent implements OnInit {
   // get product detail
   getProductDetail(id) {
     this._demoService.getDetail(id).subscribe((res) => {
-
-      console.log("RESPOPNSE IS => ", res)
       if (res) {
         this.productDetailData = res
       }
@@ -38,8 +36,6 @@ export class ProductDetailComponent implements OnInit {
 
 
   // add to cart
-  products: any[] = [];
-
   addToCart(product: any) {
     this._demoService.addItem(product)
   }

@@ -1,1 +1,79 @@
-<p>checkout works!</p>
+<div class="row px-4">
+    <a (click)="backPrevious()"> << Back</a>
+</div>
+<div class="row my-5">
+
+    <div class="col-lg-8 col-md-8 col-sm-6">
+        <!--  kendo grid start -->
+        <kendo-grid
+            [kendoGridBinding]="items"
+            [pageSize]="pagelimtit"
+            [skip]="skip"
+            [pageable]="true"
+            [loading]="isLoading"
+            [sortable]="{
+            allowUnsort : true,
+            mode : 'single'
+            }">
+            <ng-template kendoGridToolbarTemplate>
+                <button type="button" kendoGridExcelCommand icon="file-excel">
+                    Export to Excel
+                </button>
+            </ng-template>
+            {{currentPage}}
+            <kendo-grid-column
+                title="S.N."
+                [headerStyle]="{
+                'font-weight': 'bold' }"
+                [width]="85"
+                [minResizableWidth]="75">
+                <ng-template
+                    kendoGridCellTemplate
+                    let-rowIndex="rowIndex">
+                    <p>{{ rowIndex + 1 }}</p>
+                </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column
+                title="Product name"
+                field="title"
+                [headerStyle]="{
+                'font-weight': 'bold'
+                }">
+            </kendo-grid-column>
+            <kendo-grid-column
+                title="Price"
+                [headerStyle]="{
+                'font-weight': 'bold'
+                }">
+                <ng-template
+                kendoGridCellTemplate let-dataItem="dataItem">
+                {{dataItem.price|currency}}
+            </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column
+                title="Image"
+                [headerStyle]="{
+                'font-weight': 'bold' }">
+                <ng-template
+                    kendoGridCellTemplate let-dataItem="dataItem">
+                    <img [src]="dataItem.thumbnail" alt="productImg" style="max-width: 150px; max-height:150px;">
+                </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-excel fileName="Products.xlsx"></kendo-grid-excel>
+        </kendo-grid>
+        <!--  kendo grid end -->
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-6">
+        <form>
+            <div class="form-group">
+                <label for="exampleInputName">Name</label>
+                <input type="text" class="form-control" id="exampleInputName" placeholder="Enter name">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail">Email </label>
+                <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter email">
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm" style="float:right">Submit</button>
+        </form>
+    </div>
+</div>

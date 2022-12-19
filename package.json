@@ -36,6 +36,7 @@
     "@progress/kendo-licensing": "^1.2.2",
     "@progress/kendo-theme-default": "^4.6.0",
     "jquery": "^3.6.0",
+    "ngx-toastr": "^10.1.0",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"

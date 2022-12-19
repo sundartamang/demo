@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { config } from 'src/app/config';
 import { HttpClient } from '@angular/common/http';
 import { Product } from '../models/productModule';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -11,24 +13,24 @@ export class DemoService {
 
   placeholder = [];
   cartItems = new BehaviorSubject([]);
+  productData = new BehaviorSubject([]);
 
 
   constructor(
     private _http: HttpClient,
+    private _toastr: ToastrService
 
   ) {
-    const _localStorage = this.getCartData();
+    const _localStorage = this.getCartData()
 
-
-    if(_localStorage==null){
+    if (_localStorage == null) {
       this.cartItems.next([])
-    }else{
+    } else {
       this.cartItems.next(_localStorage)
     }
 
     // if (localStorage) this.cartItems.next(_localStorage)
 
-    console.log("I an demo service constructor....")
   }
 
 
@@ -37,7 +39,7 @@ export class DemoService {
     const ls = this.getCartData();
     let exist: Product;
 
-    if (ls){
+    if (ls) {
       exist = ls.find((item) => {
         return item.id === product.id;
       });
@@ -57,6 +59,16 @@ export class DemoService {
     }
   }
 
+  // is cart empty
+  get isCartEmpty() {
+    let cart = this.getCartData()
+    if (cart == null) {
+      return false
+    } else {
+      return true
+    }
+  }
+
 
   setCartData(data: any) {
     localStorage.setItem('cart', JSON.stringify(data));
@@ -67,11 +79,28 @@ export class DemoService {
     return JSON.parse(localStorage.getItem('cart'));
   }
 
+  clearCart() {
+    localStorage.clear();
+    this.cartItems.next([])
+    this.placeholder = [];
+  }
+
+
+  sendProductData(data){
+    this.productData.next(data)
+  }
+
+  // receivedData(): Observable<any> {
+  //   return this.subject_data.asObservable();
+  // }
+
+
+
+
   // get product list
   product_list_url = `${config.base_url}products?limit=100`
   getList() {
     return this._http.get(this.product_list_url)
-    // return this._http.get(`${this.product_list_url}${limit}`)
   }
 
   // get product detail
@@ -79,5 +108,19 @@ export class DemoService {
   getDetail(id) {
     return this._http.get(`${this.get_detail}${id}`)
   }
+
+  // toast success message
+  toastSuccess(message) {
+    this._toastr.success(message, 'Sucsss!', { progressBar: true });
+  }
+
+  // toast warning message
+  toastWarning(message: string) {
+    this._toastr.warning(message, '', { progressBar: true });
+  }
+
+
+
+
 
 }

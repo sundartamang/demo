@@ -1,1 +1,110 @@
-<p>cart works!</p>
+<section class="h-100 h-custom">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col">
+                <div class="card" *ngIf="items.length<1">
+                    <div class="card-body p-4">
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <p>You don't have any items in yout cart.</p>
+                                <h5 class="mb-3">
+                                    <a routerLink="/" class="btn tbn-sm btn-success">
+                                        <i class="fas fa-long-arrow-alt-left me-2"></i>Start shopping
+                                    </a>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" *ngIf="items.length>0">
+                    <div class="card-body p-4">
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <h5 class="mb-3">
+                                    <a routerLink="/" class="text-body">
+                                        <i class="fas fa-long-arrow-alt-left me-2"></i>Continue shopping
+                                    </a>
+                                </h5>
+                                <hr>
+
+                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                    <div>
+                                        <h6 class="mb-3">
+                                            <a (click)="emptyCart()"> <i class="fa fa-trash text-danger"
+                                                    aria-hidden="true"></i> Empty cart</a>
+                                        </h6>
+                                        <p class="mb-0">You have {{items.length}} items in your cart</p>
+                                    </div>
+
+                                </div>
+
+                                <div class="card mb-3" *ngFor="let data of items">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between">
+                                            <div class="d-flex flex-row align-items-center">
+                                                <div>
+                                                    <img [src]="data.thumbnail" class="img-fluid rounded-3"
+                                                        alt="Shopping item" style="width: 65px;">
+                                                </div>
+                                                <div class="mx-3">
+                                                    <h5>{{data.title}}</h5>
+                                                    <p class="small mb-0">{{data.brand}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex flex-row align-items-center">
+                                                <div style="width: 80px;">
+                                                    <h5 class="mb-0">${{data.price}}</h5>
+                                                </div>
+                                                <a href="#!" style="color: #cecece;"><i
+                                                        class="fas fa-trash-alt"></i></a>
+
+                                                <div style="width: 50px;">
+                                                    <input id="checkbox" class="form-check-input select_product" (change)="selectProduct($event,data)" type="checkbox" value="" >
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="col-lg-5">
+
+                                <div class="card bg-primary text-white rounded-3">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between">
+                                            <p class="mb-2">Subtotal</p>
+                                            <p class="mb-2">{{totalPrice|currency}}</p>
+                                        </div>
+
+                                        <div class="d-flex justify-content-between">
+                                            <p class="mb-2">Shipping</p>
+                                            <p class="mb-2">$0.00</p>
+                                        </div>
+
+                                        <div class="d-flex justify-content-between mb-4">
+                                            <p class="mb-2">Total(Incl. taxes)</p>
+                                            <p class="mb-2">$0.00</p>
+                                        </div>
+
+                                        <button [disabled]="selectedProduct.length<1" type="button" class="btn btn-info btn-block btn-lg"
+                                            (click)="redirect()">
+                                            <div class="d-flex justify-content-between">
+                                                <span>{{totalPrice|currency}}</span>
+
+                                                <span>Checkout <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
+                                            </div>
+                                        </button>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
