@@ -21,7 +21,7 @@ export class CheckoutGuard implements CanActivate {
     if(this._demoService.isCartEmpty){
       return true
     }else{
-      this._demoService.toastWarning("No product selected")
+      // this._demoService.toastWarning("No product selected")
       this._router.navigate(['/cart'])
       return false
     }

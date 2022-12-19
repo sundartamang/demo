@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { DemoService } from 'src/app/shared/service/demo.service';
-import { FormBuilder,FormGroup,FormControl,Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-checkout',
@@ -23,11 +23,12 @@ export class CheckoutComponent implements OnInit {
   constructor(
     private _location: Location,
     private _demoService: DemoService,
-    private builder: FormBuilder
+    private _fb: FormBuilder
   ) { }
 
   ngOnInit() {
     this.getCartData();
+    this.contactFormBuilder();
   }
 
 
@@ -39,11 +40,15 @@ export class CheckoutComponent implements OnInit {
   }
 
   contactFormBuilder() {
-    this.contactForm = this.builder.group({
-      name : new FormControl('',[Validators.required, Validators.minLength(2)]),
-      email : new FormControl('',[Validators.required, Validators.email]),
-      file: new FormControl('', [Validators.required])
+    this.contactForm = this._fb.group({
+      name: ['', [Validators.required, Validators.minLength(2)]],
+      email: ['',[Validators.required, Validators.email]],
+      file: ['', [Validators.required]]  
     })
+  }
+
+  onSubmit() {
+    console.log(this.contactForm.value)
   }
 
   //back to previous page

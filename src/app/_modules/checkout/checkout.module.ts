@@ -8,7 +8,7 @@ import { ButtonsModule } from "@progress/kendo-angular-buttons";
 import { GridModule,PDFModule, ExcelModule, } from "@progress/kendo-angular-grid";
 import { InputsModule } from "@progress/kendo-angular-inputs";
 import { PDFExportModule } from "@progress/kendo-angular-pdf-export";
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -24,7 +24,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     InputsModule, 
     PDFExportModule,
     ReactiveFormsModule,
-    FormsModule
   ]
 })
 export class CheckoutModule { }

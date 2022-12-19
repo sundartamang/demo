@@ -24,7 +24,6 @@ import { DemoService } from './shared/service/demo.service';
     HttpClientModule,
     BrowserAnimationsModule,
     GridModule,
-    FormsModule,
     ToastrModule.forRoot(),
   ],
   providers: [],
