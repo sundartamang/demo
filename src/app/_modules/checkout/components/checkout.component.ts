@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { DemoService } from 'src/app/shared/service/demo.service';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { EmailService } from 'src/app/shared/service/email/email.service';
+import { Router } from '@angular/router';
 declare let Email: any;
 
 @Component({
@@ -26,7 +27,8 @@ export class CheckoutComponent implements OnInit {
     private _location: Location,
     private _demoService: DemoService,
     private _fb: FormBuilder,
-    private _emailService: EmailService
+    private _emailService: EmailService,
+    private _router: Router
   ) { }
 
   ngOnInit() {
@@ -80,6 +82,7 @@ export class CheckoutComponent implements OnInit {
     }).then(
       this._demoService.toastSuccess("Mail sent successfully")
     );
+    this._router.navigate(['/cart'])
 
   }
 
