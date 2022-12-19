@@ -10,6 +10,7 @@ import { GridModule } from '@progress/kendo-angular-grid';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 import { DemoService } from './shared/service/demo.service';
+import { EmailService } from './shared/service/email/email.service';
 
 
 @NgModule({
@@ -26,7 +27,7 @@ import { DemoService } from './shared/service/demo.service';
     GridModule,
     ToastrModule.forRoot(),
   ],
-  providers: [],
+  providers: [EmailService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
