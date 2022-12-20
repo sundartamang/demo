@@ -29,8 +29,6 @@ export class CartComponent implements OnInit {
       this.items = data
 
       for (let product of this.items) {
-
-        console.log(product.price)
         this.totalPrice = this.totalPrice + product.price
       }
     })

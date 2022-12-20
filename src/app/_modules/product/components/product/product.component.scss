@@ -45,6 +45,7 @@ img {
     background: #fff;
 }
 
+
 .product_card:hover {
     box-shadow: 1px 8px 20px rgb(177, 175, 175);
     -webkit-transition:  box-shadow .6s ease-in;
@@ -68,4 +69,10 @@ img {
 .card-header{
     background-color: none;
     padding: 0px !important;
+}
+
+.welcome_text{
+    position: absolute;
+    top: 50%;
+    left: 40%;
 }

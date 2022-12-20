@@ -20,6 +20,7 @@ export class ProductComponent implements OnInit {
   productData: any = [];
   categoryList: any = [];
   brandList: any = [];
+  isFilter: boolean = false;
 
   public skip = 0;
   orderByKey = "";
@@ -70,6 +71,40 @@ export class ProductComponent implements OnInit {
     })
   }
 
+
+  // brand filter
+  filterProductData: any = []
+  filteredBrandName: string;
+
+  brandFilter(data: any) {
+    this.filteredBrandName = data
+
+    if (this.filteredBrandName) {
+      this.isFilter = true
+      this.filterProductData = this.productData.filter(item => item['brand'] === this.filteredBrandName)
+    } else {
+      this.isFilter = false
+      this.productList();
+    }
+  }
+
+
+  // category filter
+  filteredName: string;
+  categoryFilter(data: any) {
+
+    this.filteredName = data
+
+    if (this.filteredName) {
+      this.isFilter = true
+      this.filterProductData = this.productData.filter(item => item['category'] === this.filteredName)
+    } else {
+      this.isFilter = false
+      this.productList();
+    }
+
+  }
+
   // active button
   showProduct: boolean = true;
   showCategory: boolean = false;
@@ -79,11 +114,15 @@ export class ProductComponent implements OnInit {
     this.btnActive = btnName;
 
     if (btnName === 'category') {
+      this.productList();
+      this.isFilter = false
       this.showCategory = true;
       this.showBrand = false;
       this.showProduct = false;
     }
     else if (btnName === 'brand') {
+      this.productList();
+      this.isFilter = false
       this.showCategory = false;
       this.showBrand = true;
       this.showProduct = false;

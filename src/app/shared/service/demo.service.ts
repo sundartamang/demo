@@ -5,7 +5,7 @@ import { Product } from '../models/productModule';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-import {environment} from 'src/environments/environment';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +38,8 @@ export class DemoService {
 
   // add to cart
   addItem(product: Product) {
-    const ls = this.getCartData();
+    const ls = this.getCartData(); // this ge the item from console
+
     let exist: Product;
 
     if (ls) {
@@ -48,10 +49,8 @@ export class DemoService {
     }
 
     if (exist) {
-      exist.qty++;
-      this.setCartData(ls);
+      // increase quantity
     } else {
-
       if (ls) {
         const newData = [...ls, product];
         this.setCartData(newData);
@@ -62,27 +61,18 @@ export class DemoService {
   }
 
   // is cart empty
-  checkData : boolean;
+  checkData: boolean;
   get isCartEmpty() {
     let cart = this.getCartData()
 
-    // let dataInCheckout = this.productData
-
-    this.productData.subscribe((res)=>{
-      if(res.length<1){
-        this.checkData =false
-      }else{
+    this.productData.subscribe((res) => {
+      if (res.length < 1) {
+        this.checkData = false
+      } else {
         this.checkData = true;
       }
     })
-    console.log("CONDITION ", this.checkData)
     return this.checkData
-    // console.log("DATA is => ", dataInCheckout)
-    // if (cart == null) {
-    //   return false
-    // } else {
-    //   return true
-    // }
   }
 
 
